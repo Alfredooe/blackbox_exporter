@@ -1,7 +1,12 @@
 ARG ARCH="amd64"
 ARG OS="linux"
-FROM quay.io/prometheus/busybox-${OS}-${ARCH}:latest
+FROM alpine:latest
 LABEL maintainer="The Prometheus Authors <prometheus-developers@googlegroups.com>"
+
+# Install iproute2
+RUN apk update && \
+    apk add --no-cache iproute2 && \
+    rm -rf /var/cache/apk/*
 
 ARG ARCH="amd64"
 ARG OS="linux"
